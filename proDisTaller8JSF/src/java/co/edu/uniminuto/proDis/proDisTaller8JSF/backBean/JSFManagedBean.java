@@ -21,7 +21,7 @@ public class JSFManagedBean {
    */
   private float var1;
   private float var2;
-  private String Operacion;
+  private String operacion;
   private float resultado;
   private FormularioCalculadoraVo miCalc; 
   public JSFManagedBean() {
@@ -44,11 +44,11 @@ public class JSFManagedBean {
   }
 
   public String getOperacion() {
-    return Operacion;
+    return operacion;
   }
 
   public void setOperacion(String Operacion) {
-    this.Operacion = Operacion;
+    this.operacion = Operacion;
   }
 
   public float getResultado() {
@@ -68,8 +68,9 @@ public class JSFManagedBean {
   }
   
   public void calcular(){
-    FormularioCalculadoraVo miCal = new FormularioCalculadoraVo(this.var1,this.var2,this.Operacion);
+    FormularioCalculadoraVo miCal = new FormularioCalculadoraVo(this.var1,this.var2,this.operacion);
     this.setMiCalc(miCal);
     this.miCalc.setResultado();
+    this.setResultado(this.miCalc.getResultado());
   }
 }
