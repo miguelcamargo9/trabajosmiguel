@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+  <h:head>
+    <title>Calculadora JSF</title>
+  </h:head>
+  <h:body>
+    <h:form>
+      <h:panelGroup>
+        <h1>Calculadora</h1>
+        <table>
+          <tr>
+            <td>Var 1</td>
+            <td><h:inputText value="#{JSFManagedBean.var1}"></h:inputText></td>
+          </tr>
+          <tr>
+            <td>Var 2</td>
+            <td><h:inputText value="#{JSFManagedBean.var2}"></h:inputText></td>
+          </tr>
+          <tr>
+            <td>Operaciones</td>
+            <td>
+              <h:selectOneMenu>
+                <f:selectItem itemValue="SUMAR" itemLabel="Sumar"></f:selectItem>
+                <f:selectItem itemValue="RESTAR" itemLabel="Restar"></f:selectItem>
+                <f:selectItem itemValue="MULTIPLICAR" itemLabel="Multiplicar"></f:selectItem>
+                <f:selectItem itemValue="DIVIDIR" itemLabel="Dividir"></f:selectItem>
+              </h:selectOneMenu>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <h:commandButton value="Calcular" action="#{JSFManagedBean.calcular()}"></h:commandButton>
+            </td>
+          </tr>
+          <h1>
+            <h:outputText value="#{JSFManagedBean.resultado}"></h:outputText>
+          </h1>
+        </table>
+      </h:panelGroup>
+    </h:form>
+  </h:body>
+</html>
+
