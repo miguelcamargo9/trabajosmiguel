@@ -13,16 +13,16 @@
         <table>
           <tr>
             <td>Var 1</td>
-            <td><h:inputText value="#{JSFManagedBean.var1}"></h:inputText></td>
+            <td><h:inputText value="#{jSFManagedBean.var1}"></h:inputText></td>
           </tr>
           <tr>
             <td>Var 2</td>
-            <td><h:inputText value="#{JSFManagedBean.var2}"></h:inputText></td>
+            <td><h:inputText value="#{jSFManagedBean.var2}"></h:inputText></td>
           </tr>
           <tr>
             <td>Operaciones</td>
             <td>
-              <h:selectOneMenu>
+              <h:selectOneMenu value="#{jSFManagedBean.operacion}">
                 <f:selectItem itemValue="SUMAR" itemLabel="Sumar"></f:selectItem>
                 <f:selectItem itemValue="RESTAR" itemLabel="Restar"></f:selectItem>
                 <f:selectItem itemValue="MULTIPLICAR" itemLabel="Multiplicar"></f:selectItem>
@@ -32,11 +32,11 @@
           </tr>
           <tr>
             <td colspan="2">
-              <h:commandButton value="Calcular" action="#{JSFManagedBean.calcular()}"></h:commandButton>
+              <h:commandButton value="Calcular" action="#{jSFManagedBean.calcular()}"></h:commandButton>
             </td>
           </tr>
           <h1>
-            <h:outputText value="#{JSFManagedBean.resultado}"></h:outputText>
+            <h:outputText value="#{jSFManagedBean.resultado}"></h:outputText>
           </h1>
         </table>
       </h:panelGroup>
