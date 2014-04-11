@@ -19,16 +19,16 @@ public class FormularioPersonaVo {
   private String Fecha;
   private Double ValorC;
   private int Cuotas;
-  private Double ValotCuo;
+  private Double ValorCuo;
   private List<saldosPersona> saldoLista = new ArrayList<saldosPersona>();
 
-  public FormularioPersonaVo(String Nombre, String Apellido, String Fecha, Double ValorC, int Cuotas, Double ValotCuo) {
+  public FormularioPersonaVo(String Nombre, String Apellido, String Fecha, Double ValorC, int Cuotas, Double ValorCuo) {
     this.Nombre = Nombre;
     this.Apellido = Apellido;
     this.Fecha = Fecha;
     this.ValorC = ValorC;
     this.Cuotas = Cuotas;
-    this.ValotCuo = ValotCuo;
+    this.ValorCuo = ValorCuo;
   }
 
   public String getNombre() {
@@ -73,11 +73,11 @@ public class FormularioPersonaVo {
 
   public Double getValotCuo(Double ValorC) {
     this.calcularValorCuota(Integer.parseInt(this.calcularEdad(Fecha)), ValorC);
-    return ValotCuo;
+    return ValorCuo;
   }
 
   public void setValotCuo(Double ValotT) {
-    this.ValotCuo = ValotT;
+    this.ValorCuo = ValotT;
   }
 
   public String calcularEdad(String Fecha) {
