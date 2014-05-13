@@ -13,12 +13,16 @@
         <table>
           <tr>
             <td>Numero</td>
-            <td><h:inputText value="#{calculadoraMB.numero}"></h:inputText></td>
+            <td>
+              <h:inputText value="#{calculadoraMB.numero}" id="numero" label="Numero a Sumar" required="true">
+                <f:validateDoubleRange></f:validateDoubleRange>
+              </h:inputText>
+            </td>
           </tr>
           <tr>
             <td>Operaciones</td>
             <td>
-              <h:selectOneMenu value="#{jSFManagedBean.operacion}">
+              <h:selectOneMenu value="#{calculadoraMB.operacion}">
                 <f:selectItem itemValue="SUMAR" itemLabel="Sumar"></f:selectItem>
                 <f:selectItem itemValue="RESTAR" itemLabel="Restar"></f:selectItem>
                 <f:selectItem itemValue="MULTIPLICAR" itemLabel="Multiplicar"></f:selectItem>
@@ -31,12 +35,23 @@
           </tr>
           <tr>
             <td colspan="2">
-              <h:commandButton value="Calcular" action="#{jSFManagedBean.calcular()}"></h:commandButton>
+              <h:commandButton value="Calcular" action="#{calculadoraMB.calcular()}"></h:commandButton>
             </td>
           </tr>
-          <h1>
-            <h:outputText value="#{jSFManagedBean.resultado}"></h:outputText>
-          </h1>
+          <tr>
+            <td colspan="2">
+              <h1>
+                <h:outputText value="#{calculadoraMB.resultado}"></h:outputText>
+              </h1>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td colspan="2">
+              <b><h:message for="numero" ></h:message></b>
+            </td>
+          </tr>
         </table>
       </h:panelGroup>
     </h:form>
