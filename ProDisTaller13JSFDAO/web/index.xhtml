@@ -38,18 +38,18 @@
                 </td>
                 <td>
                   <h:outputText value="#{miPersona.documento}"/>
+                  <h:outputText value="#{miPersona.id}"/>
                 </td>
                 <td>
-                  <h:link value="Ver" outcome="consultar" >
-                    <f:param name="cedula" value="#{miPersona.documento}"></f:param>
-                  </h:link>
-                </td>
-                <td>
-                  <h:commandLink value="Editar" action="#{personaMB.irEditar(miPersona.documento)}">
+                  <h:commandLink value="Ver" action="#{personaMB.irConsultar(miPersona.id)}">
                   </h:commandLink>
                 </td>
                 <td>
-                  <h:commandLink value="Eliminar" action="#{personaMB.eliminar(miPersona.documento)}">
+                  <h:commandLink value="Editar" action="#{personaMB.irEditar(miPersona.id,miPersona.nombre,miPersona.apellido,miPersona.documento)}">
+                  </h:commandLink>
+                </td>
+                <td>
+                  <h:commandLink value="Eliminar" action="#{personaMB.irEliminar(miPersona.id)}">
                   </h:commandLink>
                 </td>
               </tr>

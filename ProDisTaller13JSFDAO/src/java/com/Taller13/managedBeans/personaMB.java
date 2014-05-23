@@ -21,6 +21,7 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class personaMB {
 
+  private Integer id;
   private String nombre;
   private String apellido;
   private Integer documento;
@@ -38,6 +39,14 @@ public class personaMB {
     }
   }
 
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+  
   public String getNombre() {
     return nombre;
   }
@@ -83,18 +92,31 @@ public class personaMB {
     return "eliminar"; 
   }
   
-  public String irEditar(int Cedula){
-    this.setDocumento(Cedula);
+  public String irEditar(Integer id, String nombre, String apellido, Integer documento){
+    this.setId(id);
+    this.setNombre(nombre);
+    this.setApellido(apellido);
+    this.setDocumento(documento);
     return "editar"; 
+  }
+  
+  public String irConsultar(int id){
+    this.setId(id);
+    return "consultar"; 
+  }
+  
+  public String irEliminar(int id){
+    this.setId(id);
+    return "eliminar"; 
   }
   
   public void editar(){
     miPersonaVO = new persona(nombre,apellido,documento);
+    miPersonaVO.setId(id);
     try {
       miPersonaDao.actualizarPersona(miPersonaVO);
     } catch (Exception ex) {
       Logger.getLogger(personaMB.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
-  
 }
