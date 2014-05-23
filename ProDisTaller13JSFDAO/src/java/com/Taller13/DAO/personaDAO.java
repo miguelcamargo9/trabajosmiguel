@@ -173,10 +173,11 @@ public class personaDAO {
     try {
       establecerConexion(cadenaConexion, usuario, clave);
       PreparedStatement insercion = conexion.prepareStatement(
-              "update persona set nombre = ?, apellido = ? where documento = ? ");
+              "update persona set nombre = ?, apellido = ?, documento = ? where id = ? ");
       insercion.setString(1, miPersona.getNombre());
       insercion.setString(2, miPersona.getApellido());
       insercion.setInt(3, miPersona.getDocumento());
+      insercion.setInt(4, miPersona.getId());
       insercion.executeUpdate();
     } catch (SQLException ex) {
       Logger.getLogger(personaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -229,13 +230,15 @@ public class personaDAO {
       establecerConexion(cadenaConexion, usuario, clave);
 
       ResultSet resultados = conexion.createStatement().
-              executeQuery("select nombre, apellido, documento from taller.persona ");
+              executeQuery("select id, nombre, apellido, documento from taller.persona ");
 
       while (resultados.next()) {
-        String nombre = resultados.getString(1);
-        String apellido = resultados.getString(2);
-        int documento = resultados.getInt(3);
+        Integer id = resultados.getInt(1);
+        String nombre = resultados.getString(2);
+        String apellido = resultados.getString(3);
+        Integer documento = resultados.getInt(4);
         persona miPersona = new persona(nombre, apellido, documento);
+        miPersona.setId(id);
         misPersonas.add(miPersona);
       }
 

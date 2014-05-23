@@ -10,6 +10,7 @@ package com.Taller13.vos;
  */
 public class persona {
 
+  private Integer id;
   private String nombre;
   private String apellido;
   private Integer documento;
@@ -20,6 +21,14 @@ public class persona {
     this.documento = documento;
   }
 
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+  
   public String getNombre() {
     return nombre;
   }
