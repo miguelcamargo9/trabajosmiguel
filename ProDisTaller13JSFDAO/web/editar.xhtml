@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  <head>
+    <title>Editar</title>
+  </head>
+  <body>
+    <h:form>
+      <h:panelGroup>
+        <table border="solid" cellpadding="2" cellspacing="2">
+          <tr>
+            <td>
+              Nombre
+            </td>
+            <td>
+              <h:inputText value="#{personaMB.nombre}" required="true"></h:inputText>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Apellido
+            </td>
+            <td>
+              <h:inputText value="#{personaMB.apellido}" required="true"></h:inputText>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Documento
+            </td>
+            <td>
+              <h:inputText value="#{personaMB.documento}" readonly="true"></h:inputText>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <h:commandButton value="Editar" action="#{personaMB.editar()}"></h:commandButton>
+            </td>
+          </tr>
+        </table>
+      </h:panelGroup>
+    </h:form>
+  </body>
+</html>
