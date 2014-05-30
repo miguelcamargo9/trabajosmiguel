@@ -38,10 +38,9 @@
                 </td>
                 <td>
                   <h:outputText value="#{miPersona.documento}"/>
-                  <h:outputText value="#{miPersona.id}"/>
                 </td>
                 <td>
-                  <h:commandLink value="Ver" action="#{personaMB.irConsultar(miPersona.id)}">
+                  <h:commandLink value="Ver" action="#{personaMB.irConsultar(miPersona.id,miPersona.nombre,miPersona.apellido,miPersona.documento)}">
                   </h:commandLink>
                 </td>
                 <td>
@@ -49,14 +48,18 @@
                   </h:commandLink>
                 </td>
                 <td>
-                  <h:commandLink value="Eliminar" action="#{personaMB.irEliminar(miPersona.id)}">
+                  <h:commandLink value="Eliminar" action="#{personaMB.irEliminar(miPersona.id,miPersona.nombre,miPersona.apellido,miPersona.documento)}">
                   </h:commandLink>
                 </td>
               </tr>
 
             </c:forEach>
             <tr>
-              <td colspan="6" align="right">
+              <td colspan="3" align="right">
+                <h:link value="Buscar Persona" outcome="buscar" >
+                </h:link>
+              </td>
+              <td colspan="3" align="right">
                 <h:link value="Nueva Persona" outcome="nuevo" >
                 </h:link>
               </td>

@@ -4,11 +4,49 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
   <head>
-    <title>TODO supply a title</title>
+    <title>Nueva Persona</title>
   </head>
   <body>
-    <div>TODO write content</div>
+    #{personaMB.limpiar()}
+    <h:form>
+      <h:panelGroup>
+        <table border="solid" cellpadding="2" cellspacing="2">
+          <tr>
+            <td>
+              Nombre
+            </td>
+            <td>
+              <h:inputText value="#{personaMB.nombre}" required="true"></h:inputText>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Apellido
+            </td>
+            <td>
+              <h:inputText value="#{personaMB.apellido}" required="true"></h:inputText>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Documento
+            </td>
+            <td>
+              <h:inputText value="#{personaMB.documento}" required="true"></h:inputText>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <h:commandButton value="Insertar" action="#{personaMB.nuevo()}"></h:commandButton>
+            </td>
+          </tr>
+        </table>
+      </h:panelGroup>
+    </h:form>
   </body>
 </html>
