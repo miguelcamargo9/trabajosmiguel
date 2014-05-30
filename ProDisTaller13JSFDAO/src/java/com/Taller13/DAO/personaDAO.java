@@ -167,9 +167,8 @@ public class personaDAO {
       }
     }
   }
-  
-  
-    public void actualizarPersona(persona miPersona) throws Exception {
+
+  public void actualizarPersona(persona miPersona) throws Exception {
     try {
       establecerConexion(cadenaConexion, usuario, clave);
       PreparedStatement insercion = conexion.prepareStatement(
@@ -195,11 +194,11 @@ public class personaDAO {
   /*
    * metodo para eliminar persona
    */
-  public void eliminarPersona(String nombre) throws Exception {
+  public void eliminarPersona(Integer id) throws Exception {
     try {
       establecerConexion(cadenaConexion, usuario, clave);
       Statement insercion = conexion.createStatement();
-      String sql = "delete from persona where persona.nombre like '%" + nombre + "%'";
+      String sql = "delete from persona where persona.id = " + id + "";
 
       int delete = insercion.executeUpdate(sql);
 
@@ -242,6 +241,38 @@ public class personaDAO {
         misPersonas.add(miPersona);
       }
 
+
+    } catch (SQLException ex) {
+      Logger.getLogger(personaDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      if (conexion != null) {
+        try {
+          closeConnection(conexion);
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return misPersonas;
+  }
+
+  public List<persona> buscarPersona(String letra) throws Exception {
+    List<persona> misPersonas = new ArrayList<persona>();
+    try {
+      establecerConexion(cadenaConexion, usuario, clave);
+
+      ResultSet resultados = conexion.createStatement().
+              executeQuery("select id, nombre, apellido, documento from taller.persona where persona.nombre like " + "'%" + letra + "%'");
+
+      while (resultados.next()) {
+        Integer id = resultados.getInt(1);
+        String nombre = resultados.getString(2);
+        String apellido = resultados.getString(3);
+        Integer documento = resultados.getInt(4);
+        persona miPersona = new persona(nombre, apellido, documento);
+        miPersona.setId(id);
+        misPersonas.add(miPersona);
+      }
 
     } catch (SQLException ex) {
       Logger.getLogger(personaDAO.class.getName()).log(Level.SEVERE, null, ex);

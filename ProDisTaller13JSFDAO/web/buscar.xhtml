@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  <h:head>
+    <title>Buscar Persona</title>
+  </h:head>
+  <h:body>
+    <h:form>
+      <h:panelGroup>
+        <table border="solid" cellpadding="2" cellspacing="2">
+          <tr>
+            <td>
+              Nombre
+            </td>
+            <td>
+              <h:inputText id="nombreFiltro" autocomplete="off" value="#{personaMB.nombre}"  >
+                <f:ajax render="personasBuscar" event="keyup" listener="#{personaMB.nombreChangeListener}"/>
+              </h:inputText>
+            </td>
+          </tr>
+          <tr>
+            <h:dataTable value="#{personaMB.personaPorNombre}" border="1" var="item" id="personasBuscar">
+              <h:column>
+                <f:facet name="header">
+                  Nombre
+                </f:facet>
+                <h:outputText value="#{item.nombre}" />
+              </h:column>
+              <h:column>
+                <f:facet name="header">
+                  Apellido
+                </f:facet>
+                <h:outputText value="#{item.apellido}" />
+              </h:column>
+              <h:column>
+                <f:facet name="header">
+                  Documento
+                </f:facet>
+                <h:outputText value="#{item.documento}" />
+              </h:column>
+            </h:dataTable>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <h:commandButton value="Volver" action="#{personaMB.volver()}"></h:commandButton>
+            </td>
+          </tr>
+        </table>
+      </h:panelGroup>
+    </h:form>
+  </h:body>
+</html>
