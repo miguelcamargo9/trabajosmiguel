@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,9 +27,9 @@ public class distrubucionServlet extends HttpServlet {
   ArrayList<Double> vRandom2 = new ArrayList<>();
   ArrayList<Double> fx = new ArrayList<>();
   ArrayList<Double> x = new ArrayList<>();
+  ArrayList<String> data = new ArrayList<>();
   /**
-   * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-   * methods.
+   * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
    *
    * @param request servlet request
    * @param response servlet response
@@ -43,19 +44,15 @@ public class distrubucionServlet extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     try {
-      /* TODO output your page here. You may use following sample code. */
-      out.println("<!DOCTYPE html>");
-      out.println("<html>");
-      out.println("<head>");
-      out.println("<title>Servlet distrubucionServlet</title>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>Servlet distrubucionServlet at " + diasSim + "</h1>");
-      for (Integer i : vRandomDias) {
-        out.println("mire: "+i.toString()+"<br>");
+      HttpSession session = request.getSession();
+      String labels = "";
+      for (int i = 0; i < diasSim; i++) {
+        labels += "\"Dia" + (i + 1) + "\",";
+        data.add("65, 59, 90, 81, 56, 55, 40");
       }
-      out.println("</body>");
-      out.println("</html>");
+      session.setAttribute("labels", labels.substring(0, labels.length() - 1));
+      session.setAttribute("data", data);
+      response.sendRedirect("salida.jsp");
     } finally {
       out.close();
     }
@@ -103,77 +100,63 @@ public class distrubucionServlet extends HttpServlet {
   public String getServletInfo() {
     return "Short description";
   }// </editor-fold>
-  
+
   public void generarDias(Integer numeroDias) {
     for (int i = 0; i < numeroDias; i++) {
       Double numeroAleatorio = Math.random();
       Double numeroAleatorio2 = Math.random();
       vRandom1.add(numeroAleatorio);
       vRandom2.add(numeroAleatorio2);
-      if(0.0000<= numeroAleatorio && numeroAleatorio < 0.0067) {
+      if (0.0000 <= numeroAleatorio && numeroAleatorio < 0.0067) {
         this.vRandomDias.add(0);
-      } 
-      else if(0.0067<= numeroAleatorio && numeroAleatorio < 0.0404) {
+      } else if (0.0067 <= numeroAleatorio && numeroAleatorio < 0.0404) {
         this.vRandomDias.add(1);
-      } 
-      else if(0.0404<= numeroAleatorio && numeroAleatorio < 0.1246) {
+      } else if (0.0404 <= numeroAleatorio && numeroAleatorio < 0.1246) {
         this.vRandomDias.add(2);
-      } 
-      else if(0.1246<= numeroAleatorio && numeroAleatorio < 0.2650) {
+      } else if (0.1246 <= numeroAleatorio && numeroAleatorio < 0.2650) {
         this.vRandomDias.add(3);
-      } 
-      else if(0.2650<= numeroAleatorio && numeroAleatorio < 0.4405) {
+      } else if (0.2650 <= numeroAleatorio && numeroAleatorio < 0.4405) {
         this.vRandomDias.add(4);
-      } 
-      else if(0.4405<= numeroAleatorio && numeroAleatorio < 0.6160) {
+      } else if (0.4405 <= numeroAleatorio && numeroAleatorio < 0.6160) {
         this.vRandomDias.add(5);
-      } 
-      else if(0.6160<= numeroAleatorio && numeroAleatorio < 0.7622) {
+      } else if (0.6160 <= numeroAleatorio && numeroAleatorio < 0.7622) {
         this.vRandomDias.add(6);
-      } 
-      else if(0.7622<= numeroAleatorio && numeroAleatorio < 0.8666) {
+      } else if (0.7622 <= numeroAleatorio && numeroAleatorio < 0.8666) {
         this.vRandomDias.add(7);
-      } 
-      else if(0.8666<= numeroAleatorio && numeroAleatorio < 0.9319) {
+      } else if (0.8666 <= numeroAleatorio && numeroAleatorio < 0.9319) {
         this.vRandomDias.add(8);
-      } 
-      else if(0.9319<= numeroAleatorio && numeroAleatorio < 0.9682) {
+      } else if (0.9319 <= numeroAleatorio && numeroAleatorio < 0.9682) {
         this.vRandomDias.add(9);
-      } 
-      else if(0.9682<= numeroAleatorio && numeroAleatorio < 0.9863) {
+      } else if (0.9682 <= numeroAleatorio && numeroAleatorio < 0.9863) {
         this.vRandomDias.add(10);
-      } 
-      else if(0.9863<= numeroAleatorio && numeroAleatorio < 0.9945) {
+      } else if (0.9863 <= numeroAleatorio && numeroAleatorio < 0.9945) {
         this.vRandomDias.add(11);
-      } 
-      else if(0.9945<= numeroAleatorio && numeroAleatorio < 0.9979) {
+      } else if (0.9945 <= numeroAleatorio && numeroAleatorio < 0.9979) {
         this.vRandomDias.add(12);
-      } 
-      else if(0.9979<= numeroAleatorio && numeroAleatorio < 0.9992) {
+      } else if (0.9979 <= numeroAleatorio && numeroAleatorio < 0.9992) {
         this.vRandomDias.add(13);
-      } 
-      else if(0.9992<= numeroAleatorio && numeroAleatorio < 0.9997) {
+      } else if (0.9992 <= numeroAleatorio && numeroAleatorio < 0.9997) {
         this.vRandomDias.add(14);
-      } 
-      else if(0.9997<= numeroAleatorio && numeroAleatorio < 0.9999) {
+      } else if (0.9997 <= numeroAleatorio && numeroAleatorio < 0.9999) {
         this.vRandomDias.add(15);
-      } 
+      }
     }
   }
-  
+
   public void calcularX() {
-     for (int i = 0; i < vRandom1.size(); i++) {
-       Double valor = 6+(12+6)*vRandom1.get(i);
-       x.add(valor);
-     }
+    for (int i = 0; i < vRandom1.size(); i++) {
+      Double valor = 6 + (12 + 6) * vRandom1.get(i);
+      x.add(valor);
+    }
   }
+
   public void calcularFX() {
     for (int i = 0; i < x.size(); i++) {
       Double valor = 0.0;
-      if(x.get(i)>=6 && x.get(i)<=9){
-       valor = (x.get(i)*(0.11))-0.66;
+      if (x.get(i) >= 6 && x.get(i) <= 9) {
+        valor = (x.get(i) * (0.11)) - 0.66;
       } else {
-        valor = (-x.get(i)*(0.11))-0.66;
+        valor = (-x.get(i) * (0.11)) - 0.66;
       }
       fx.add(valor);
     }
