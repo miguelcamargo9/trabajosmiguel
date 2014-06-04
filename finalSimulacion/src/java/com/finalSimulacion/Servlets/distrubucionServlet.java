@@ -22,7 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 public class distrubucionServlet extends HttpServlet {
 
   ArrayList<Integer> vRandomDias = new ArrayList<>();
-  ArrayList<Double> vRandom = new ArrayList<>();
+  ArrayList<Double> vRandom1 = new ArrayList<>();
+  ArrayList<Double> vRandom2 = new ArrayList<>();
+  ArrayList<Double> fx = new ArrayList<>();
+  ArrayList<Double> x = new ArrayList<>();
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
    * methods.
@@ -86,6 +89,8 @@ public class distrubucionServlet extends HttpServlet {
           throws ServletException, IOException {
     diasSim = Integer.parseInt(request.getParameter("diasSimular"));
     this.generarDias(diasSim);
+    this.calcularX();
+    this.calcularFX();
     processRequest(request, response);
   }
 
@@ -102,7 +107,9 @@ public class distrubucionServlet extends HttpServlet {
   public void generarDias(Integer numeroDias) {
     for (int i = 0; i < numeroDias; i++) {
       Double numeroAleatorio = Math.random();
-      vRandom.add(numeroAleatorio);
+      Double numeroAleatorio2 = Math.random();
+      vRandom1.add(numeroAleatorio);
+      vRandom2.add(numeroAleatorio2);
       if(0.0000<= numeroAleatorio && numeroAleatorio < 0.0067) {
         this.vRandomDias.add(0);
       } 
@@ -151,6 +158,24 @@ public class distrubucionServlet extends HttpServlet {
       else if(0.9997<= numeroAleatorio && numeroAleatorio < 0.9999) {
         this.vRandomDias.add(15);
       } 
+    }
+  }
+  
+  public void calcularX() {
+     for (int i = 0; i < vRandom1.size(); i++) {
+       Double valor = 6+(12+6)*vRandom1.get(i);
+       x.add(valor);
+     }
+  }
+  public void calcularFX() {
+    for (int i = 0; i < x.size(); i++) {
+      Double valor = 0.0;
+      if(x.get(i)>=6 && x.get(i)<=9){
+       valor = (x.get(i)*(0.11))-0.66;
+      } else {
+        valor = (-x.get(i)*(0.11))-0.66;
+      }
+      fx.add(valor);
     }
   }
 }
