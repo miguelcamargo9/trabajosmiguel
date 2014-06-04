@@ -6,6 +6,8 @@ package com.finalSimulacion.Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,19 +21,20 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "distrubucionServlet", urlPatterns = {"/distrubucionServlet"})
 public class distrubucionServlet extends HttpServlet {
 
+  ArrayList<Integer> vRandomDias = new ArrayList<>();
+  ArrayList<Double> vRandom = new ArrayList<>();
   /**
-   * Processes requests for both HTTP
-   * <code>GET</code> and
-   * <code>POST</code> methods.
+   * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+   * methods.
    *
    * @param request servlet request
    * @param response servlet response
    * @throws ServletException if a servlet-specific error occurs
    * @throws IOException if an I/O error occurs
    */
-  
+
   Integer diasSim;
-  
+
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
@@ -41,21 +44,23 @@ public class distrubucionServlet extends HttpServlet {
       out.println("<!DOCTYPE html>");
       out.println("<html>");
       out.println("<head>");
-      out.println("<title>Servlet distrubucionServlet</title>");      
+      out.println("<title>Servlet distrubucionServlet</title>");
       out.println("</head>");
       out.println("<body>");
       out.println("<h1>Servlet distrubucionServlet at " + diasSim + "</h1>");
+      for (Integer i : vRandomDias) {
+        out.println("mire: "+i.toString()+"<br>");
+      }
       out.println("</body>");
       out.println("</html>");
-    } finally {      
+    } finally {
       out.close();
     }
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
   /**
-   * Handles the HTTP
-   * <code>GET</code> method.
+   * Handles the HTTP <code>GET</code> method.
    *
    * @param request servlet request
    * @param response servlet response
@@ -69,8 +74,7 @@ public class distrubucionServlet extends HttpServlet {
   }
 
   /**
-   * Handles the HTTP
-   * <code>POST</code> method.
+   * Handles the HTTP <code>POST</code> method.
    *
    * @param request servlet request
    * @param response servlet response
@@ -81,6 +85,7 @@ public class distrubucionServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     diasSim = Integer.parseInt(request.getParameter("diasSimular"));
+    this.generarDias(diasSim);
     processRequest(request, response);
   }
 
@@ -93,4 +98,59 @@ public class distrubucionServlet extends HttpServlet {
   public String getServletInfo() {
     return "Short description";
   }// </editor-fold>
+  
+  public void generarDias(Integer numeroDias) {
+    for (int i = 0; i < numeroDias; i++) {
+      Double numeroAleatorio = Math.random();
+      vRandom.add(numeroAleatorio);
+      if(0.0000<= numeroAleatorio && numeroAleatorio < 0.0067) {
+        this.vRandomDias.add(0);
+      } 
+      else if(0.0067<= numeroAleatorio && numeroAleatorio < 0.0404) {
+        this.vRandomDias.add(1);
+      } 
+      else if(0.0404<= numeroAleatorio && numeroAleatorio < 0.1246) {
+        this.vRandomDias.add(2);
+      } 
+      else if(0.1246<= numeroAleatorio && numeroAleatorio < 0.2650) {
+        this.vRandomDias.add(3);
+      } 
+      else if(0.2650<= numeroAleatorio && numeroAleatorio < 0.4405) {
+        this.vRandomDias.add(4);
+      } 
+      else if(0.4405<= numeroAleatorio && numeroAleatorio < 0.6160) {
+        this.vRandomDias.add(5);
+      } 
+      else if(0.6160<= numeroAleatorio && numeroAleatorio < 0.7622) {
+        this.vRandomDias.add(6);
+      } 
+      else if(0.7622<= numeroAleatorio && numeroAleatorio < 0.8666) {
+        this.vRandomDias.add(7);
+      } 
+      else if(0.8666<= numeroAleatorio && numeroAleatorio < 0.9319) {
+        this.vRandomDias.add(8);
+      } 
+      else if(0.9319<= numeroAleatorio && numeroAleatorio < 0.9682) {
+        this.vRandomDias.add(9);
+      } 
+      else if(0.9682<= numeroAleatorio && numeroAleatorio < 0.9863) {
+        this.vRandomDias.add(10);
+      } 
+      else if(0.9863<= numeroAleatorio && numeroAleatorio < 0.9945) {
+        this.vRandomDias.add(11);
+      } 
+      else if(0.9945<= numeroAleatorio && numeroAleatorio < 0.9979) {
+        this.vRandomDias.add(12);
+      } 
+      else if(0.9979<= numeroAleatorio && numeroAleatorio < 0.9992) {
+        this.vRandomDias.add(13);
+      } 
+      else if(0.9992<= numeroAleatorio && numeroAleatorio < 0.9997) {
+        this.vRandomDias.add(14);
+      } 
+      else if(0.9997<= numeroAleatorio && numeroAleatorio < 0.9999) {
+        this.vRandomDias.add(15);
+      } 
+    }
+  }
 }
