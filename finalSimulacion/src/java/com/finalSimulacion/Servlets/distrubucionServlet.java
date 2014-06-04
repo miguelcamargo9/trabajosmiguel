@@ -149,7 +149,7 @@ public class distrubucionServlet extends HttpServlet {
       x.add(valor);
     }
   }
-
+  
   public void calcularFX() {
     for (int i = 0; i < x.size(); i++) {
       Double valor = 0.0;
@@ -160,5 +160,21 @@ public class distrubucionServlet extends HttpServlet {
       }
       fx.add(valor);
     }
+  }
+  
+  public Double calcularLlegada(Double Random){
+    return -(Math.log(Random))/ 64;
+  }
+  
+  public Double calcularEmpaquetado(Double Random){
+    return 30+((50-30)*Random);
+  }
+  
+  public Double calcularEnsamblado(Double Random){
+    Double sumatoria = 0.0;
+    for(int i = 0;i< 12; i++){
+      sumatoria = sumatoria + ((sumatoria*i)-6);
+    }
+    return 15 + 10 * (sumatoria);
   }
 }
