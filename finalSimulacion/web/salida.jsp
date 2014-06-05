@@ -4,12 +4,16 @@
     Author     : open12
 --%>
 
+<%@page import="com.finalSimulacion.VO.elementoVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
   String labels = null;
+  String total = null;
   ArrayList data = (ArrayList) session.getAttribute("data");
+  ArrayList<elementoVO> datos = (ArrayList<elementoVO>) session.getAttribute("arreglo");
   labels = (String) session.getAttribute("labels");
+  labels = (String) session.getAttribute("total");
 %>
 <!DOCTYPE html>
 <html>
@@ -40,6 +44,16 @@
               fillColor: "rgba(50,123,45,0.5)",
               strokeColor: "rgba(151,187,205,1)",
               data: [<%=data.get(2)%>]
+            },
+            {
+              fillColor: "rgba(50,123,45,0.5)",
+              strokeColor: "rgba(151,187,205,1)",
+              data: [<%=data.get(3)%>]
+            },
+            {
+              fillColor: "rgba(50,123,45,0.5)",
+              strokeColor: "rgba(151,187,205,1)",
+              data: [<%=data.get(4)%>]
             }
           ]
         };
@@ -55,6 +69,39 @@
     <fieldset>
       <legend>Grafico</legend>
       <canvas id="myChart" width="1200" height="500"></canvas>
+    </fieldset>
+    <h1>total = <%=total%></h1>
+    <fieldset>
+      <legend>Tabla</legend>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>tapas</th>
+            <th>tapas cola</th>
+            <th>paquetes</th>
+            <th>paquetes cola</th>
+            <th>producto final</th>
+            <th>producto final cola</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% 
+          for (elementoVO elemento: datos) {
+          %>
+          <tr>
+            <td><%=elemento.getTapas()%></td>
+            <td><%=elemento.getTapasCola()%></td>
+            <td><%=elemento.getPaquetes()%></td>
+            <td><%=elemento.getPaquetesCola()%></td>
+            <td><%=elemento.getProductoFinal()%></td>
+            <td><%=elemento.getProductoFinalCola()%></td>
+          </tr>
+          <%
+          }
+          %>
+        </tbody>
+      </table>
+
     </fieldset>
   </body>
 </html>
