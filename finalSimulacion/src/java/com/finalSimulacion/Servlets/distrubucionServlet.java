@@ -52,15 +52,15 @@ public class distrubucionServlet extends HttpServlet {
       for (int i = 0; i < diasSim; i++) {
         labels += "\"Dia" + (i + 1) + "\",";
       }
-      for (elementoVO elemento: elementos) {
-        data.add(elemento.getTapas()+","+elemento.getTapasCola()+","+elemento.getPaquetes()+","+elemento.getPaquetesCola()+","+elemento.getProductoFinal());
+      for (elementoVO elemento : elementos) {
+        data.add(elemento.getTapas() + "," + elemento.getTapasCola() + "," + elemento.getPaquetes() + "," + elemento.getPaquetesCola() + "," + elemento.getProductoFinal());
       }
-      
+
       session.setAttribute("labels", labels.substring(0, labels.length() - 1));
       session.setAttribute("data", data);
       session.setAttribute("arreglo", elementos);
-      System.out.println("mire: "+elementos.get(elementos.size()-1).getProductoFinalCola());
-      session.setAttribute("total", ""+elementos.get(elementos.size()-1).getProductoFinalCola());
+      System.out.println("mire: " + elementos.get(elementos.size() - 1).getProductoFinalCola());
+      session.setAttribute("total", "" + elementos.get(elementos.size() - 1).getProductoFinalCola());
       response.sendRedirect("salida.jsp");
     } finally {
       out.close();
@@ -97,14 +97,14 @@ public class distrubucionServlet extends HttpServlet {
           throws ServletException, IOException {
     diasSim = Integer.parseInt(request.getParameter("diasSimular"));
     this.generarDias(diasSim);
-    Integer minutos = 0;
     Integer minutosTapas = 0;
     Integer minutosPaquetes = 0;
-    ArrayList<Integer> tiemposTapasPintadas = new ArrayList<>();
-    ArrayList<Integer> tiemposDesempaquetados = new ArrayList<>();
+
     for (int i = 0; i < diasSim; i++) {
+      ArrayList<Integer> tiemposTapasPintadas = new ArrayList<>();
+      ArrayList<Integer> tiemposDesempaquetados = new ArrayList<>();
       elementoVO elemento = new elementoVO();
-      Integer cantidadTapas = !elementos.isEmpty() ? elementos.get(elementos.size()-1).getTapasCola()+vRandomDias.get(i):vRandomDias.get(i);
+      Integer cantidadTapas = !elementos.isEmpty() ? elementos.get(elementos.size() - 1).getTapasCola() + vRandomDias.get(i) : vRandomDias.get(i);
       for (int j = 0; j < cantidadTapas; j++) {
         Double randomX = Math.random();
         Double randomXN = this.calcularX(randomX);
@@ -137,6 +137,7 @@ public class distrubucionServlet extends HttpServlet {
         cantidadTapasPintadas = cantidadTapasPintadas - 2;
         if (cantidadTapasPintadas <= 0) {
           elementosProducidos = z;
+          cantidadTapasPintadas = 0;
           break;
         }
         elementosProducidos = z;
@@ -144,7 +145,12 @@ public class distrubucionServlet extends HttpServlet {
       elemento.setTapas(tiemposTapasPintadas.size());
       elemento.setTapasCola(cantidadTapasPintadas);
       elemento.setPaquetes(llegadas.intValue());
-      elemento.setPaquetesCola(tiemposDesempaquetados.size() - elementosProducidos);
+      int colaPa = tiemposDesempaquetados.size() - elementosProducidos;
+      if (colaPa >= 0) {
+        elemento.setPaquetesCola(tiemposDesempaquetados.size() - elementosProducidos);
+      } else {
+        elemento.setPaquetesCola(0);
+      }
       elemento.setProductoFinal(elementosProducidos);
       elemento.setProductoFinalCola(!elementos.isEmpty() ? elementos.get(elementos.size() - 1).getProductoFinalCola() + elementosProducidos.intValue() : elementosProducidos.intValue());
       elementos.add(elemento);
@@ -222,7 +228,7 @@ public class distrubucionServlet extends HttpServlet {
 
   public Double calcularLlegada(Double Random) {
 //    return -(Math.log(Random)) / 64;
-    return -64*(Math.log(Random));
+    return -64 * (Math.log(Random));
   }
 
   public Double calcularEmpaquetado(Double Random) {
